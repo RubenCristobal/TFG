@@ -1,0 +1,365 @@
+openapi: 3.0.3
+info:
+  title: Tutorías ETSISI. UPM
+  version: 1.0.0
+  description: "<b>API para la gestión de usuarios del SRT.</b>"
+  contact:
+    email: 'r.cristobal@alumnos.upm.es'
+  license:
+    name: GPL-3.0-only
+    url: 'https://opensource.org/licenses/GPL-3.0'
+servers:
+  - url: 'http://127.0.0.1/api/v1'
+    description: Servidor SRT
+paths:
+  /users:
+    get:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Obtiene un array con todos los usuarios y sus atributos.
+      operationId: getUsuarios
+      responses:
+        200:
+          description: Array de usuarios y sus atributos.
+          headers:
+            Etag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  usuarios:
+                    description: Array de usuarios
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/Alumno'
+                        - $ref: '#/components/schemas/Profesor'
+                      discriminator:
+                        propertyName: userType
+              examples:
+                usersExamples:
+                  $ref: '#/components/examples/usersExamples'
+        401:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_401'
+        403:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_403'
+        404:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_404'
+    post:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Crea un nuevo usuario.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/Alumno'
+                - $ref: '#/components/schemas/Profesor'
+              discriminator:
+                propertyName: userType
+      security:
+        - bearerAuth: []
+      responses:
+        201:
+          description: Usuario creado
+          headers:
+            Location:
+              $ref: '#/components/headers/Location'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Alumno'
+                  - $ref: '#/components/schemas/Profesor'
+                discriminator:
+                  propertyName: userType
+        400:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_400'        
+        401:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_401'
+        403:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_403'
+        422:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_422'
+
+    options:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Proporciona la lista de los métodos HTTP soportados.
+      description: Devuelve una cabecera `Allow` con la lista de métodos HTTP soportados (separados por comas).
+      operationId: usuariosOptions
+      responses:
+        204:
+          description: 'cabecera `Allow` &lt;El cuerpo de la respuesta está vacío&gt;'
+          headers:
+            Allow:
+              $ref: '#/components/headers/usuariosAllow'
+
+  '/users/{id}':
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Recupera un usuario específico identificado por su ID.
+      description: Devuelve el usuario identificado por `userId`.
+      operationId: getUserById
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Usuario recuperado
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Alumno'
+                  - $ref: '#/components/schemas/Profesor'
+                discriminator:
+                  propertyName: userType
+        401:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_401'
+        403:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_403'
+        404:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_404'
+    put:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Modifica un usuario identificado por su ID.
+      description: Actualiza el usuario identificado por `ususarioId`.
+      operationId: updateUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ifMatchParam'
+      requestBody:
+        $ref: '#/components/requestBodies/UserRB'
+      responses:
+        200:
+          description: '`OK`: el usuario ha sido modificada'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Alumno'
+                  - $ref: '#/components/schemas/Profesor'
+                discriminator:
+                  propertyName: userType
+        401:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_401'
+        404:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_404'
+        412:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_412'
+    delete:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Elimina un ususario identificado por su ID.
+      description: Elimina el usuario identificado por `userId`.
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: Ususario eliminado &lt;Cuerpo de la respuesta vacío&gt;
+        401:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_401'
+        404:
+          $ref: './schemas/HTTP_Responses.yaml#/Response_404'
+    options:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Proporciona la lista de los métodos HTTP soportados.
+      description: Devuelve una cabecera `Allow` con la lista de métodos HTTP soportados (separados por comas).
+      operationId: usuariosOptions
+      responses:
+        204:
+          description: 'cabecera `Allow` &lt;El cuerpo de la respuesta está vacío&gt;'
+          headers:
+            Allow:
+              $ref: '#/components/headers/usuariosByIdAllow'
+  /users/type:
+    parameters:
+      - $ref: '#/components/parameters/userType'
+    get:
+      tags:
+        - Usuarios 🙋‍♂️
+      summary: Obtiene un array con todos los usuarios y sus atributos.
+      operationId: getUsuarios
+      responses:
+        200:
+          description: Array de usuarios y sus atributos.
+          headers:
+            Etag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  usuarios:
+                    description: Array de usuarios
+                    type: array
+                    items:
+                      oneOf:
+                        - $ref: '#/components/schemas/Alumno'
+                        - $ref: '#/components/schemas/Profesor'
+                      discriminator:
+                        propertyName: userType
+              examples:
+                usersExamples:
+                  $ref: '#/components/examples/usersExamples'
+
+        
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  headers:
+    ETag:
+      description: Entity Tag (identificador único proporcionado para validación de caché)
+      schema:
+        type: string
+        example:
+          33a64df551425fcc
+    Location:
+      description: '`URI` del nuevo recurso'
+      schema:
+        type: string
+        format: url
+        x-faker: internet.url
+        example:
+          /api/v1/usuarios/1936
+    usuariosAllow:
+      description: Lista de métodos HTTP soportados
+      schema:
+        type: string
+      example:
+        GET,POST,OPTIONS
+    usuariosByIdAllow:
+      description: Lista de métodos HTTP soportados
+      schema:
+        type: string
+      example:
+        GET,PUT,DELETE,OPTIONS
+  parameters:
+    ifMatchParam:
+      name: If-Match
+      in: header
+      description: ETag del recurso que se desea modificar
+      required: true
+      schema:
+        type: string
+        pattern: "[0-9a-f]*"
+    userId:
+      name: id
+      in: path
+      description: Id de un ususario
+      required: true
+      schema:
+        type: integer
+        pattern: ^\d+$
+    userType:
+      name: type
+      in: query
+      description: Tipo de Ususario
+      required: true
+      schema:
+        type: string
+        enum:
+          - alumno
+          - profesor
+  schemas:
+    Alumno:
+      $ref: './schemas/Alumno.yaml#/Alumno'
+    Profesor:
+      $ref: './schemas/Profesor.yaml#/Profesor'
+  requestBodies:
+    UserRB:
+      description: '`User` data'
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - loginName
+              - name
+              - surnames
+              - email
+            properties:
+              loginName:
+                description: The user name for login
+                type: string
+              name:
+                description: Nombre del ususario
+                type: string
+              surnames:
+                description: Apellidos del ususario
+                type: string
+              email:
+                description: email usuario
+                type: string
+              usuariostate:
+                description: Estado del usuario
+                type: string
+                enum:
+                  - active
+                  - disabled
+            example:
+              loginName: pablo123
+              name: Pablo
+              surnames: García González
+              email: pablo.garcia.gonzalez@upm.es 
+  examples:
+    usersExamples:
+      value:
+        - id: 1234
+          loginName: pablo123
+          name: Pablo
+          surnames: García González
+          email: pablo.garcia.gonzalez@upm.es
+          nMatricula: ab2314
+          titulacion: Ingenieria del Software
+          asignaturas:
+            - Fundamentos de programacion
+            - Sistemas operativos
+          links:
+            parent:
+                href: /api/v1/usuarios
+                rel: self
+            self:
+                href: /api/v1/usuarios/1234
+                rel: getUserById deleteUserById
+        - id: 5678
+          loginName: mario567
+          name: Mario
+          surnames: Gómez Fernández
+          email: mario.gomez.fernandez@upm.es
+          nMatricula: ab2314
+          titulacion: Ingenieria del Software
+          asignaturas:
+           - Fundamentos de programacion
+           - Sistemas operativos
+          links:
+            parent:
+                href: /api/v1/usuarios
+                rel: self
+            self:
+                href: /api/v1/usuarios/5678
+                rel: getUserById deleteUserById
+    
+
+  
+
+    

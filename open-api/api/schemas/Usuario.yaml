@@ -1,0 +1,61 @@
+Usuario:
+  type: object
+  description: Usuario del SRT
+  required:
+    - id
+    - loginName
+    - type
+    - userState
+  properties:
+    id:
+      description: Id usuario
+      readOnly: true
+      type: integer
+      format: int32
+    loginName:
+      description: The user name for login
+      type: string
+    userType:
+      description: Tipo de usuario
+      type: string
+      enum:
+        - alumno
+        - profesor
+    name:
+      description: Nombre del ususario
+      type: string
+    surnames:
+      description: Apellidos del ususario
+      type: string
+    email:
+      description: email usuario
+      type: string
+    userState:
+      description: Estado del usuario
+      type: string
+      enum:
+        - active
+        - disabled
+    _links:
+      description: Enlaces de relación
+      type: array
+      items:
+        $ref: './Link.yaml#/Link'
+  example:
+    loginName: pablo123
+    type: Alumno
+    name: Pablo
+    surnames: García González
+    email: pablo.garcia.gonzalez@upm.es
+    nMatricula: ab2314
+    titulacion: Ingenieria del Software
+    asignaturas:
+      - Fundamentos de programacion
+      - Sistemas operativos
+    _links:
+      parent:
+          href: /api/v1/users
+          rel: self
+      self:
+          href: /api/v1/users/1234
+          rel: getUserById deleteUserById

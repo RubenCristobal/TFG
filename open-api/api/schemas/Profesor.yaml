@@ -1,0 +1,11 @@
+Profesor:
+  allOf:
+    - $ref: './Usuario.yaml#/Usuario'
+    - type: object
+      properties:
+        asignaturas:
+          description: Asignaturas impartidas por el profesor
+          type: array
+          items:
+            type: string
+        

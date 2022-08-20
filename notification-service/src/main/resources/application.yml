@@ -1,0 +1,17 @@
+server:
+  port: 8093
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: microservices0sender@gmail.com
+    password: iturpgyblbowpnve
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+receiver: microservices0receiver@gmail.com

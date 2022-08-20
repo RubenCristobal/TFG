@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+  booking-service:
+    image: rubencg177/booking-service:latest
+    container_name: booking-gateway
+    ports:
+      - 8092:8092
+    networks:
+      - mysql_default
+networks:
+  mysql_default:
+    external: true

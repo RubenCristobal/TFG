@@ -1,0 +1,1023 @@
+{
+	"info": {
+		"_postman_id": "7ae821cd-aa18-4c38-b430-02ff38772e82",
+		"name": "tfg-microservicios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15244453"
+	},
+	"item": [
+		{
+			"name": "api-gateway (public API)",
+			"item": [
+				{
+					"name": "/users-service/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginName\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-gateway}}/users-service/auth/login",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"users-service",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users-service/auth/new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginName\": \"pedro\",\n    \"email\": \"admin@com\",\n    \"password\": \"admin\",\n    \"firstName\": \"admin\",\n    \"lastName\": \"admin\",\n    \"roles\": [\"admin\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-gateway}}/users-service/auth/new",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"users-service",
+								"auth",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/booking-service/bookings/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-gateway}}/booking-service/bookings/all",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"booking-service",
+								"bookings",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/booking-service/bookings/new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentName\": \"student\",\n    \"teacherName\": \"alvaro\",\n    \"date\": \"2022-06-26\",\n    \"time\": \"14:37:31\",\n    \"format\": \"PRESENCIAL\",\n    \"description\": \"me he guardado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-gateway}}/booking-service/bookings/new",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"booking-service",
+								"bookings",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/booking-service/bookings/update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"15\",\n    \"studentName\": \"pedro\",\n    \"teacherName\": \"juana\",\n    \"date\": \"2025-06-30\",\n    \"time\": \"17:34:15\",\n    \"format\": \"ONLINE\",\n    \"description\": \"TFG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-gateway}}/booking-service/bookings/update",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"booking-service",
+								"bookings",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/booking-service/bookings/delete/",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-gateway}}/booking-service/bookings/delete/:id",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"booking-service",
+								"bookings",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/booking-service/calendar/new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teacherName\": \"student\",\n    \"lunes\": \"true\",\n    \"martes\": \"false\",\n    \"miercoles\": \"true\",\n    \"jueves\": \"false\",\n    \"viernes\": \"true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-gateway}}/booking-service/calendar/new",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"booking-service",
+								"calendar",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/booking-service/calendar/update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 10,\n    \"teacherName\": \"RaulLara12\",\n    \"lunes\": true,\n    \"martes\": false,\n    \"miercoles\": false,\n    \"jueves\": false,\n    \"viernes\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-gateway}}/booking-service/calendar/update",
+							"host": [
+								"{{api-gateway}}"
+							],
+							"path": [
+								"booking-service",
+								"calendar",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users-service",
+			"item": [
+				{
+					"name": "/auth/new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginName\": \"student\",\n    \"email\": \"student@mail.com\",\n    \"password\": \"student\",\n    \"firstName\": \"student\",\n    \"lastName\": \"student\",\n    \"roles\": [\"teacher\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8091/auth/new",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"auth",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginName\": \"maria\",\n    \"password\": \"maria\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8091/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/check",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loginName\": \"maria\",\n    \"password\": \"maria\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8091/user/check",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{loginName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/loginName/:loginName",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"loginName",
+								":loginName"
+							],
+							"variable": [
+								{
+									"key": "loginName",
+									"value": "pedro"
+								},
+								{
+									"key": "loginName",
+									"value": "pedro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/teachers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/teachers",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"teachers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/students",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/exists/{loginName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/exists/loginName/:loginName",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"exists",
+								"loginName",
+								":loginName"
+							],
+							"variable": [
+								{
+									"key": "loginName",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/exists/{email}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8091/user/exists/email/:email",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"user",
+								"exists",
+								"email",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "maria@mail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "booking-service",
+			"item": [
+				{
+					"name": "/bookings/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/delete/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/delete/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/student/{studentName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/student/:studentName",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"student",
+								":studentName"
+							],
+							"variable": [
+								{
+									"key": "studentName",
+									"value": "pedro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/student/count/{studentName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/student/count/:studentName",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"student",
+								"count",
+								":studentName"
+							],
+							"variable": [
+								{
+									"key": "studentName",
+									"value": "alvaro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/student/next/{studentName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/student/next/:studentName",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"student",
+								"next",
+								":studentName"
+							],
+							"variable": [
+								{
+									"key": "studentName",
+									"value": "pedro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/teacherName/{teacherName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/teacher/:teacherName",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"teacher",
+								":teacherName"
+							],
+							"variable": [
+								{
+									"key": "teacherName",
+									"value": "alvaro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/teacher/count/{teacherName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/teacher/count/:teacherName",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"teacher",
+								"count",
+								":teacherName"
+							],
+							"variable": [
+								{
+									"key": "teacherName",
+									"value": "alvaro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/teacher/next/{teacherName}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/bookings/teacher/next/:teacherName",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"teacher",
+								"next",
+								":teacherName"
+							],
+							"variable": [
+								{
+									"key": "teacherName",
+									"value": "alvaro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentName\": \"student\",\n    \"teacherName\": \"alvaro\",\n    \"date\": \"2022-06-26\",\n    \"time\": \"14:37:31\",\n    \"format\": \"PRESENCIAL\",\n    \"description\": \"me he guardado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8092/bookings/new",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"15\",\n    \"studentName\": \"pedro\",\n    \"teacherName\": \"juana\",\n    \"date\": \"2025-06-30\",\n    \"time\": \"17:34:15\",\n    \"format\": \"ONLINE\",\n    \"description\": \"TFG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8092/bookings/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"bookings",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/calendar/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"calendar",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/calendar/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"calendar",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/{teacher}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8092/calendar/teacher/:teacher",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"calendar",
+								"teacher",
+								":teacher"
+							],
+							"variable": [
+								{
+									"key": "teacher",
+									"value": "maria"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teacherName\": \"student\",\n    \"lunes\": \"true\",\n    \"martes\": \"false\",\n    \"miercoles\": \"true\",\n    \"jueves\": \"false\",\n    \"viernes\": \"true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8092/calendar/new",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"calendar",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calendar/update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 10,\n    \"teacherName\": \"RaulLara12\",\n    \"lunes\": true,\n    \"martes\": false,\n    \"miercoles\": false,\n    \"jueves\": false,\n    \"viernes\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8092/calendar/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"calendar",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notification-service",
+			"item": [
+				{
+					"name": "/mail/booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentName\": \"student\",\n    \"teacherName\": \"alvaro\",\n    \"date\": \"2022-06-23\",\n    \"time\": \"17:34:15\",\n    \"format\": \"PRESENCIAL\",\n    \"description\": \"hola new\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8093/mail/booking",
+							"host": [
+								"localhost"
+							],
+							"port": "8093",
+							"path": [
+								"mail",
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/mail/booking/delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentName\": \"student\",\n    \"teacherName\": \"alvaro\",\n    \"date\": \"2022-06-23\",\n    \"time\": \"17:34:15\",\n    \"format\": \"PRESENCIAL\",\n    \"description\": \"hola new\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8093/mail/booking/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8093",
+							"path": [
+								"mail",
+								"booking",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/mail/calendar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teacherName\": \"student\",\n    \"lunes\": \"true\",\n    \"martes\": \"false\",\n    \"miercoles\": \"true\",\n    \"jueves\": \"false\",\n    \"viernes\": \"true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8093/mail/calendar",
+							"host": [
+								"localhost"
+							],
+							"port": "8093",
+							"path": [
+								"mail",
+								"calendar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYSIsImlhdCI6MTY1Njk2NTM3NiwiZXhwIjoxNjU2OTY4OTc2fQ.iIV0YapbfVaZtf72tztoItILlWeLiRW1XgGNtzbYqb2Y-EFsBU84nimsp76plNE-p5S0MbBG6snS6j_jNZ0GMw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

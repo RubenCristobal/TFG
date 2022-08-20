@@ -1,0 +1,11 @@
+Link:
+  type: object
+  description: Enlace de relación para garantizar hypermedia.
+  properties:
+    href:
+      description: URL del enlace
+      type: string
+      format: url
+    rel: 
+      description: Relación del recurso actual con una lista de enlaces separados por espacio.
+      type: string

@@ -1,0 +1,12 @@
+version: "3.1"
+services:
+  api-gateway:
+    image: rubencg177/api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - 8090:8090
+    networks:
+      - mysql_default
+networks:
+  mysql_default:
+    external: true

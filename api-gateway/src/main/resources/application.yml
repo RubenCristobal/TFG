@@ -1,0 +1,32 @@
+server:
+  port: 8090
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      routes:
+      - id: users-service
+        uri: http://localhost:8091/
+        predicates:
+        - Path=/users-service/**
+        filters:
+        - RewritePath=/users-service/(?<segment>.*), /$\{segment}
+      - id: booking-service
+        uri: http://localhost:8092/
+        predicates:
+        - Path=/booking-service/**
+        filters:
+        - RewritePath=/booking-service/(?<segment>.*), /$\{segment}
+      - id: notification-service
+        uri: http://localhost:8093/
+        predicates:
+        - Path=/notification-service/**
+        filters:
+        - RewritePath=/notification-service/(?<segment>.*), /$\{segment}
+        

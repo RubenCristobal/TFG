@@ -1,0 +1,24 @@
+version: "3.1"
+services:
+  mysql_database:
+    image: mysql:5.7
+    container_name: mysql_database
+    ports:
+      - 3306:3306
+    volumes:
+      - /media/ruben/ext4-drive/docker/mysql_database:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tfg
+      MYSQL_USER: tfg
+      MYSQL_PASSWORD: tfg
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - PMA_HOST=mysql_database
+      - PMA_PORT=3306

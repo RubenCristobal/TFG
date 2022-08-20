@@ -1,0 +1,29 @@
+version: "3"
+services:
+    # proxy:
+    #     image: caddy
+    #     container_name: notificaciones_proxy
+    #     volumes:
+    #         - ./Caddyfile:/etc/caddy/Caddyfile
+    #     ports:
+    #         - 80:80
+        # depends_on:
+        #     - backend
+  backend:
+    image: stoplight/prism:4
+    container_name: open-api-mock
+    command: mock --cors -h 0.0.0.0 /api/open-api.yaml
+    command: proxy /api/open-api.yaml http://127.0.0.1/api/v1
+    ports:
+      - 4010:4010
+    volumes:
+      - ./api:/api:ro
+  frontend:
+    image: swaggerapi/swagger-ui
+    container_name: open-api-ui
+    ports:
+      - 8000:8080
+    environment:
+      SWAGGER_JSON: /api/open-api.yaml
+    volumes:
+      - ./api:/api:ro

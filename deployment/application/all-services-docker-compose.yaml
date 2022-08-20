@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+  vueclient:
+    image: rubencg177/vue-client:latest
+    container_name: vue-client
+    ports:
+      - 8080:8080
+
+  api-gateway:
+    image: rubencg177/api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - 8090:8090
+
+  users-service:
+    image: rubencg177/users-service:latest
+    container_name: users-service
+    ports:
+      - 8091:8091
+    depends_on:
+    - mysql_database
+
+  booking-service:
+    image: rubencg177/booking-service:latest
+    container_name: booking-service
+    ports:
+      - 8092:8092
+    depends_on:
+    - mysql_database
+
+  notification-service:
+    image: rubencg177/notification-service:latest
+    container_name: notification-service
+    ports:
+      - 8093:8093
+
+  mysql_database:
+    image: mysql:5.7
+    container_name: mysql_database
+    ports:
+      - 3306:3306
+    volumes:
+      - /media/ruben/ext4-drive/docker/mysql_database:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tfg
+      MYSQL_USER: tfg
+      MYSQL_PASSWORD: tfg
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - PMA_HOST=mysql_database
+      - PMA_PORT=3306
+

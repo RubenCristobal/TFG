@@ -1,0 +1,41 @@
+pipeline {
+    agent none
+    stages {
+        stage('Build package') {
+            agent {
+                docker { image 'gradle:jdk11-alpine' }
+            } 
+            steps {
+                echo 'Building java package...'
+                sh 'gradle bootJar'
+                echo 'Jar file name:'
+                sh 'ls -l build/libs'
+            }
+        }
+        stage('Build Docker image') {
+            agent { label 'jenkins-agent' }
+            steps {
+                echo 'Building Docker image from Dockerfile...'
+                sh 'docker build -t rubencg177/$JOB_NAME .'
+            }
+        }
+        stage('Pushing image to DockerHub') {
+            agent { label 'jenkins-agent' }
+            environment {
+                DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+            }
+            steps {
+                echo 'Login in DockerHub account...'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo 'Pushing image to DockerHub...'
+                sh 'docker push rubencg177/$JOB_NAME:latest'
+                sh 'docker logout'
+            }
+            post {
+                always {
+                    sh 'docker logout'
+                }
+            }
+        }
+    }
+}

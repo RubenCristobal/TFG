@@ -1,0 +1,11 @@
+Alumno:
+  allOf:
+    - $ref: './Usuario.yaml#/Usuario'
+    - type: object
+      properties:
+        nMatricula:
+          description: Numero de matricula del alumno
+          type: string
+        titulacion:
+          description: Titulacion del alumno
+          type: string
